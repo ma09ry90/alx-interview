@@ -1,21 +1,24 @@
 #!/usr/bin/python3
-""" Minimum Operations
+"""
+    calculates minimum operations.
+"""
+
+
+def minOperations(n):
+    """ Method that calculates the fewest number of operations
+        needed to result in exactly n H characters in the file.
+        Args:
+            n: Is a number to print H characters.
     """
+    count = 0
+    seg_ment = 2
 
-
-def minOperations(n: int) -> int:
-    """ Minimum Operations needed to get n H characters """
-    next = 'H'
-    body = 'H'
-    op = 0
-    while (len(body) < n):
-        if n % len(body) == 0:
-            op += 2
-            next = body
-            body += body
-        else:
-            op += 1
-            body += next
-    if len(body) != n:
+    if n <= 1:
         return 0
-    return op
+    while n != 1:
+        if n % seg_ment == 0:
+            n = n // seg_ment
+            count += seg_ment
+        else:
+            seg_ment += 1
+    return count
